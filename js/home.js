@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     </a>`).join('') + `
     <a class="tile tile-naughty" href="naughty-step.html" aria-label="The Naughty Step, 18 plus">
       <div class="tile-18"><span class="pill18">18+</span><span class="tile-hush">Ruder words.<br>Same cake.</span></div>
-      <div><strong>NAUGHTY STEP</strong><span>From ${money(((C.naughty || [])[0] || { from: 45 }).from)}</span></div>
+      <div><strong>NAUGHTY STEP</strong><span>From ${money(Math.min(...(C.naughty || [{ from: 24 }]).map(c => c.from)))}</span></div>
     </a>`;
 
   // Quick bakes
