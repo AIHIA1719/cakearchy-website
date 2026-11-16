@@ -177,6 +177,8 @@ section:first-of-type { border-top: 0; }
 .field-box label { display: block; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--text-2); }
 .field-box select, .field-box input { border: 0; background: transparent; font-weight: 800; font-size: 16px; width: 100%; padding: 0; outline: none; }
 .field-box > div { flex: 1; min-width: 0; }
+.field-box input[type="date"] { text-align: left; -webkit-appearance: none; appearance: none; min-height: 22px; display: block; }
+.field-box input[type="date"]::-webkit-date-and-time-value { text-align: left; margin: 0; }
 .finder-result { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 16px 24px; align-items: center; min-height: 40px; }
 .pill {
   display: inline-flex; align-items: center; gap: 8px; border: 2px solid var(--border); border-radius: var(--r-full); padding: 8px 16px; font-weight: 800; font-size: 15px; background: var(--bg-accent);

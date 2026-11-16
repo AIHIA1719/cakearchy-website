@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const a = availability(S.date, leadType());
       return `${label('Occasion')}${chips('occasion', C.occasions.filter(o => o.id !== 'cupcakes').map(o => o.name), occ().name)}
         ${field('who', isWedding() ? 'Your names' : 'Whose party is it?', S.who, 'placeholder="' + (isWedding() ? 'Sam and Alex' : 'Ava, turning 5') + '"')}
-        ${field('date', 'Party date', S.date, `type="date" min="${addDays(0)}"`)}
+        ${field('date', 'Date', S.date, `type="date" min="${addDays(0)}"`)}
         <div id="date-msg">${a.status === 'free' ? notice('good', a.title, a.body + ' Send your request soon to hold it.') : a.status === 'none' ? '' : notice('warn', a.title, a.body + (a.quickOk ? ' <a href="quick-bakes.html" style="color:#fff">See quick bakes</a>' : ''))}</div>
         ${a.status === 'free' ? notice('info', daysUntil(S.date) >= 14 ? 'You\'re in plenty of time' : 'Good timing', `I need at least ${C.leadTimes[leadType()]} days' notice for this. You've got ${daysUntil(S.date)}.`) : ''}`;
     }, valid: () => availability(S.date, leadType()).status === 'free' || 'Pick a date that\'s free' },
