@@ -20,6 +20,9 @@ window.CAKEARCHY = {
     launchMonth: 'early 2027'
   },
 
+  // Festive snow and sprinkles on the homepage. Runs between these dates (MM-DD) each year.
+  festive: { enabled: true, from: '11-15', to: '01-06' },
+
   // Minimum notice in days
   leadTimes: {
     quick: 3,        // Quick bakes

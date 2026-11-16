@@ -114,6 +114,8 @@
       <a class="btn btn-secondary btn-lg btn-block" style="margin-top:32px" href="order.html">Order a cake</a>
       <p style="margin-top:16px;font-weight:700">${C.business.email} · @cakearchy</p>
     </div>`;
+    const setH = () => { const h = $('.site-header'); if (h) document.documentElement.style.setProperty('--header-h', h.offsetHeight + 'px'); };
+    setH(); addEventListener('resize', setH); document.fonts && document.fonts.ready.then(setH);
     const menu = $('.mobile-menu');
     $('[data-menu-open]').addEventListener('click', () => { menu.dataset.open = 'true'; document.body.style.overflow = 'hidden'; });
     $('[data-menu-close]').addEventListener('click', () => { menu.dataset.open = 'false'; document.body.style.overflow = ''; });
@@ -127,7 +129,7 @@
       <div class="wrap">
         <div class="footer-top">
           <div style="display:grid;gap:12px;align-content:start">
-            <span class="wordmark" style="font-size:40px">CAKEARCHY</span>
+            <span class="logo" style="justify-self:start">${CROWN}<span class="wordmark" style="font-size:40px">CAKEARCHY</span></span>
             <span class="hand" style="color:var(--pink-200)">Thanks for being part of the Cakearchy!</span>
           </div>
           <div class="footer-cols">

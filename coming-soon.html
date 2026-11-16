@@ -62,7 +62,7 @@
       </div>
     </section>
   </main>
-  <footer class="site-footer"><div class="wrap"><span class="wordmark" style="font-size:36px">CAKEARCHY</span><p class="legal">© 2026 Cakearchy · Harpenden, Hertfordshire · hello@cakearchy.com</p></div></footer>
+  <footer class="site-footer"><div class="wrap"><span class="logo" id="foot-logo"></span><p class="legal">© 2026 Cakearchy · Harpenden, Hertfordshire · hello@cakearchy.com</p></div></footer>
 
   <script src="js/config.js"></script>
   <script src="js/site.js"></script>
@@ -70,6 +70,7 @@
   document.addEventListener('DOMContentLoaded', () => {
     const { C, $, $$, store, money, notice, CROWN } = window.CA;
     $('#logo').innerHTML = CROWN + '<span class="wordmark">CAKEARCHY</span>';
+    $('#foot-logo').innerHTML = CROWN + '<span class="wordmark" style="font-size:36px">CAKEARCHY</span>';
     $$('[data-launch]').forEach(e => e.textContent = C.business.launchMonth);
     const wants = new Set(store.get('wants', []));
     $('#menu').innerHTML = C.quickBakes.map(q => `<article class="card qb"><img src="${q.img}" alt="${q.name}" loading="lazy"><span class="tag butter">Launching soon</span>
