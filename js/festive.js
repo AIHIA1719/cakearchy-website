@@ -59,12 +59,26 @@
     const stop = () => { running = false; cancelAnimationFrame(raf); ctx.clearRect(0, 0, W, H); canvas.style.display = 'none'; };
     const label = () => { btn.textContent = '❄'; btn.style.opacity = off ? '.55' : '1'; btn.title = off ? 'Let it snow' : 'Stop the snow'; btn.setAttribute('aria-label', btn.title); btn.setAttribute('aria-pressed', String(!off)); };
 
+    // Snow only shows when the page first loads. As soon as someone starts
+    // scrolling it fades away for good (until the next page load).
+    let faded = false;
+    canvas.style.transition = btn.style.transition = 'opacity 1.2s ease';
+    const fade = () => {
+      if (faded || scrollY < 10) return;
+      faded = true;
+      removeEventListener('scroll', fade);
+      canvas.style.opacity = '0'; btn.style.opacity = '0'; btn.style.pointerEvents = 'none';
+      setTimeout(() => { running = false; cancelAnimationFrame(raf); canvas.remove(); btn.remove(); }, 1300);
+    };
+    addEventListener('scroll', fade, { passive: true });
+
     btn.addEventListener('click', () => { off = !off; try { localStorage.setItem('cakearchy:snowOff', off ? '1' : '0'); } catch (e) {} label(); off ? stop() : start(); });
     addEventListener('resize', () => { if (running) resize(); });
-    document.addEventListener('visibilitychange', () => { if (document.hidden) { cancelAnimationFrame(raf); } else if (running) { tick(); } });
+    document.addEventListener('visibilitychange', () => { if (document.hidden) { cancelAnimationFrame(raf); } else if (running && !faded) { tick(); } });
 
     if (reduce) off = true;
     label();
     if (!off) start(); else canvas.style.display = 'none';
+    fade();
   });
 })();
