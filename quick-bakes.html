@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quick bakes · Cakearchy</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Caveat+Brush&family=Kaushan+Script&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .product { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+    .product .photo { border: 3px solid var(--border); border-radius: 24px; box-shadow: var(--shadow); width: 100%; aspect-ratio: 1; object-fit: cover; position: sticky; top: 110px; }
+    .product form { display: grid; gap: 16px; }
+    .buybar { display: flex; align-items: center; gap: 16px; padding: 16px 0; border-top: 3px solid var(--border); margin-top: 8px; }
+    @media (max-width: 900px) {
+      .product { grid-template-columns: 1fr; gap: 20px; }
+      .product .photo { position: static; }
+      .buybar { position: sticky; bottom: 0; background: var(--bg-surface); margin: 0 -24px; padding: 14px 24px 24px; }
+    }
+  </style>
+</head>
+<body>
+  <div id="site-header"></div>
+  <main>
+    <section class="section bg-soft" id="list">
+      <div class="wrap">
+        <div class="section-head"><h1 class="display-l">QUICK BAKES</h1><p class="lead" style="color:var(--text)">A short menu of favourites, ready in 3 days. Pick, pay and you're done.</p></div>
+        <div class="grid-5" id="quick-grid"></div>
+        <p style="text-align:center;margin-top:32px;font-weight:700">Want something different? <a href="order.html">Design your own cake</a>.</p>
+      </div>
+    </section>
+
+    <section class="section hidden" id="detail">
+      <div class="wrap product">
+        <img class="photo" id="p-img" alt="">
+        <form id="p-form">
+          <a href="quick-bakes.html" style="font-weight:800">← All quick bakes</a>
+          <div class="chips"><span class="tag butter">Ready in 3 days</span><span class="tag pink" id="p-slots"></span></div>
+          <h1 class="display-l" id="p-name"></h1>
+          <p class="lead" id="p-desc"></p>
+          <div><span class="label muted">How many?</span><div class="form-grid" id="p-sizes" style="margin-top:8px"></div></div>
+          <div id="p-flav-wrap"><span class="label muted">Flavour</span><div class="chips" id="p-flav" style="margin-top:8px"></div></div>
+          <div id="p-col-wrap"><span class="label muted">Colour</span><div class="chips" id="p-col" style="margin-top:8px"></div></div>
+          <div class="field hidden" id="p-msg-wrap"><label class="label" for="p-msg">Message on the cake (optional)</label><input class="input" id="p-msg" maxlength="30" placeholder="You're a legend"></div>
+          <div class="field"><label class="label" for="p-date">Collection or delivery date</label><input class="input" type="date" id="p-date" required><div id="p-date-msg" style="margin-top:10px"></div></div>
+          <div><span class="label muted">Add-ons</span><div class="form-grid" id="p-addons" style="margin-top:8px"></div></div>
+          <div id="p-allergy"></div>
+          <div class="buybar"><div style="flex:1"><span class="label muted">Price</span><div class="price" id="p-total"></div></div><button class="btn btn-primary btn-lg" type="submit">Add to basket</button></div>
+        </form>
+      </div>
+    </section>
+  </main>
+  <div id="site-footer"></div>
+  <script src="js/config.js"></script>
+  <script src="js/site.js"></script>
+  <script src="js/quick.js"></script>
+</body>
+</html>

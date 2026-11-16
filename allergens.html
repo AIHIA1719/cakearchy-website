@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Allergens · Cakearchy</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Caveat+Brush&family=Kaushan+Script&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    table { width: 100%; border-collapse: collapse; border: 3px solid var(--border); border-radius: 20px; overflow: hidden; background: var(--bg-surface); }
+    th, td { text-align: left; padding: 14px 16px; border-bottom: 1px solid var(--pink-200); vertical-align: top; }
+    th { background: var(--bg-inverse); color: #fff; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; }
+  </style>
+</head>
+<body>
+  <div id="site-header"></div>
+  <main>
+    <section class="section">
+      <div class="wrap" style="max-width:900px;display:grid;gap:24px">
+        <h1 class="display-l">ALLERGIES, HONESTLY</h1>
+        <p class="lead">Everything is baked in my home kitchen in Harpenden, which handles nuts, gluten, eggs, milk and soya. I'm careful, but I can't promise any cake is completely free from traces. If someone has a serious allergy, please message me before you order.</p>
+        <div id="table"></div>
+        <div class="notice info"><div><strong>Every cake has a label</strong><p>Each cake and box comes with a label listing all 14 major allergens it contains.</p></div></div>
+        <a class="btn btn-primary btn-lg" style="justify-self:start" href="mailto:hello@cakearchy.com?subject=Allergy question">Ask me about an allergy</a>
+      </div>
+    </section>
+  </main>
+  <div id="site-footer"></div>
+  <script src="js/config.js"></script>
+  <script src="js/site.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const { C } = window.CA;
+      const say = { yes: 'Yes, on request', ingredients: 'Made without, but not safe for a serious allergy', no: 'No, I can\'t do this safely' };
+      document.getElementById('table').innerHTML = `<table><thead><tr><th>Allergen</th><th>Can I make it without?</th><th>Details</th></tr></thead><tbody>${
+        C.allergens.map(a => `<tr><td><strong>${a.name}</strong></td><td>${say[a.can]}</td><td class="muted">${a.okBody || 'My kitchen handles nuts every day.'}</td></tr>`).join('')}
+        <tr><td><strong>${C.otherAllergens.join(', ')}</strong></td><td>Not used in my recipes</td><td class="muted">Tell me if you need them avoided and I'll double-check every ingredient.</td></tr></tbody></table>`;
+    });
+  </script>
+</body>
+</html>

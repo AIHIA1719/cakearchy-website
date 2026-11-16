@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Order a cake · Cakearchy</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Caveat+Brush&family=Kaushan+Script&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div id="site-header"></div>
+  <main class="flow" id="flow">
+    <div class="flow-head">
+      <div class="row"><button class="back" type="button" id="back" aria-label="Back"></button><span class="label" id="step-label">Step 1 of 6</span><span class="small muted" id="saved">Saved</span></div>
+      <div class="progress" aria-hidden="true"><span id="bar" style="width:16%"></span></div>
+      <h1 class="flow-title" id="step-title"></h1>
+    </div>
+    <form class="flow-body" id="step" novalidate></form>
+    <div class="flow-bar"><div class="total"><span class="label muted">Price guide</span><div class="price" id="price">From £55</div></div><button class="btn btn-primary btn-lg" type="button" id="next">Continue</button></div>
+  </main>
+
+  <main class="flow hidden" id="sent" style="background:var(--bg-brand-soft)">
+    <div class="flow-body" style="text-align:center;justify-items:center;padding-top:48px">
+      <span class="sticker ink tilt-l">Your cake is in the Cakearchy!</span>
+      <h1 class="display-xl" style="font-size:60px">REQUEST SENT!</h1>
+      <p class="lead" style="color:var(--text)" id="sent-msg"></p>
+      <div class="timeline" style="text-align:left;width:100%"><ul id="sent-steps"></ul></div>
+      <a class="btn btn-primary btn-lg btn-block" href="track.html">Track your order</a>
+      <a class="btn btn-outline btn-lg btn-block" href="index.html">Back to the cakes</a>
+    </div>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/site.js"></script>
+  <script src="js/order.js"></script>
+</body>
+</html>

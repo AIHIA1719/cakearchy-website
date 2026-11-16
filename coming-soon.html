@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cakearchy · Coming soon to Harpenden</title>
+  <meta name="description" content="Bold, bright, bespoke cakes. Coming soon to Harpenden. Join the list for first dibs on launch dates.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Caveat+Brush&family=Kaushan+Script&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .cs-head { display: flex; justify-content: center; padding: 24px 0 0; }
+    .want { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 0 20px 20px; }
+    .want .btn[aria-pressed="true"] { background: var(--bg-inverse); color: #fff; }
+    .signup { background: var(--bg-surface); border: 3px solid var(--border); border-radius: 24px; box-shadow: var(--shadow); padding: 28px; display: grid; gap: 16px; max-width: 640px; margin: 0 auto; }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero" style="text-align:center">
+      <div class="wrap" style="display:grid;gap:22px;justify-items:center">
+        <a class="logo" href="#" aria-label="Cakearchy" id="logo"></a>
+        <span class="sticker butter tilt-l">Coming soon to Harpenden</span>
+        <h1 class="display-xl">CAKES WITHOUT<br>THE RULES.</h1>
+        <p class="lead" style="color:var(--text);max-width:640px">Bold, bright, bespoke celebration cakes and quick bakes, made in my Harpenden kitchen. Launching <span data-launch></span>. Join the list for first dibs on dates and a little launch treat.</p>
+        <a class="btn btn-primary btn-lg" href="#join">Join the Cakearchy</a>
+      </div>
+    </section>
+
+    <section class="section bg-soft">
+      <div class="wrap">
+        <div class="section-head"><h2>WHAT WOULD YOU ORDER?</h2><p class="lead" style="color:var(--text)">Tap the ones you'd buy. It helps me decide what to launch with. Nothing's for sale just yet.</p></div>
+        <div class="grid-5" id="menu"></div>
+      </div>
+    </section>
+
+    <section class="section" id="join">
+      <div class="wrap">
+        <form class="signup" id="signup" novalidate>
+          <h2 style="text-align:center">JOIN THE CAKEARCHY</h2>
+          <p class="muted" style="text-align:center">First pick of launch dates, plus a free cherry upgrade on your first order.</p>
+          <div class="field"><label class="label" for="name">First name</label><input class="input" id="name" name="name" autocomplete="given-name" required></div>
+          <div class="field"><label class="label" for="email">Email</label><input class="input" id="email" name="email" type="email" autocomplete="email" required></div>
+          <div class="field"><label class="label" for="postcode">Postcode</label><input class="input" id="postcode" name="postcode" autocomplete="postal-code" placeholder="AL5" required><small class="muted">Just the first part is fine. It tells me if you're in my delivery area.</small></div>
+          <div><span class="label muted">What are you likely to celebrate?</span><div class="chips" id="occ" style="margin-top:8px"></div></div>
+          <div class="field"><label class="label" for="next">When's your next celebration?</label>
+            <select class="input" id="next" name="next"><option value="">Choose one</option><option>In the next month</option><option>1 to 3 months</option><option>3 to 6 months</option><option>6 months or more</option><option>Not sure yet</option></select></div>
+          <div class="field"><label class="label" for="budget">What would you usually spend on a celebration cake?</label>
+            <select class="input" id="budget" name="budget"><option value="">Choose one</option><option>Under £30</option><option>£30 to £50</option><option>£50 to £80</option><option>£80 to £120</option><option>£120+</option></select></div>
+          <div class="field"><label class="label" for="dietary">Any dietary needs in your house? (optional)</label><input class="input" id="dietary" name="dietary" placeholder="Egg-free, coeliac, vegan…"></div>
+          <label class="choice"><input type="checkbox" id="consent" required><span class="box"></span><span class="txt"><strong>Email me about the launch</strong><small>Occasional emails from Cakearchy. Unsubscribe any time. I'll never share your details.</small></span></label>
+          <div id="err"></div>
+          <button class="btn btn-primary btn-lg btn-block" type="submit">Count me in</button>
+        </form>
+        <div class="signup hidden" id="thanks" style="text-align:center;justify-items:center">
+          <span class="sticker tilt-l">You're in!</span>
+          <h2>THANKS FOR BEING PART OF THE CAKEARCHY</h2>
+          <p class="lead">I'll email you before launch with first dibs on dates. In the meantime, come and say hi on Instagram.</p>
+          <a class="btn btn-secondary btn-lg" href="https://instagram.com/cakearchy">Follow @cakearchy</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="wrap"><span class="wordmark" style="font-size:36px">CAKEARCHY</span><p class="legal">© 2026 Cakearchy · Harpenden, Hertfordshire · hello@cakearchy.com</p></div></footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/site.js"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const { C, $, $$, store, money, notice, CROWN } = window.CA;
+    $('#logo').innerHTML = CROWN + '<span class="wordmark">CAKEARCHY</span>';
+    $$('[data-launch]').forEach(e => e.textContent = C.business.launchMonth);
+    const wants = new Set(store.get('wants', []));
+    $('#menu').innerHTML = C.quickBakes.map(q => `<article class="card qb"><img src="${q.img}" alt="${q.name}" loading="lazy"><span class="tag butter">Launching soon</span>
+      <div class="card-body"><h4>${q.name}</h4><p class="small muted">${q.sub}</p></div>
+      <div class="want"><span class="price">${q.sizes.length > 1 ? 'From ' : ''}${money(Math.min(...q.sizes.map(s => s.price)))}</span><button type="button" class="btn btn-outline" data-want="${q.id}" aria-pressed="${wants.has(q.id)}">I'd buy this</button></div></article>`).join('');
+    $('#menu').addEventListener('click', e => { const b = e.target.closest('[data-want]'); if (!b) return; const id = b.dataset.want;
+      wants.has(id) ? wants.delete(id) : wants.add(id); b.setAttribute('aria-pressed', wants.has(id)); store.set('wants', [...wants]); });
+    const occ = [...C.occasions.map(o => o.name), 'Quick treats'];
+    $('#occ').innerHTML = occ.map(o => `<button type="button" class="chip" aria-pressed="false">${o}</button>`).join('');
+    $('#occ').addEventListener('click', e => { const b = e.target.closest('.chip'); if (b) b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') !== 'true'); });
+
+    $('#signup').addEventListener('submit', async e => {
+      e.preventDefault();
+      if (!$('#name').value.trim() || !/\S+@\S+\.\S+/.test($('#email').value) || !$('#postcode').value.trim()) { $('#err').innerHTML = notice('warn', 'Nearly there', 'Add your name, email and postcode.'); return; }
+      if (!$('#consent').checked) { $('#err').innerHTML = notice('warn', 'One more thing', 'Tick the box so I\'m allowed to email you.'); return; }
+      const data = { name: $('#name').value, email: $('#email').value, postcode: $('#postcode').value.toUpperCase(), occasions: $$('#occ .chip[aria-pressed=true]').map(b => b.textContent).join(', '),
+        next: $('#next').value, budget: $('#budget').value, dietary: $('#dietary').value, wouldBuy: [...wants].join(', '), consent: 'yes', at: new Date().toISOString() };
+      const url = C.business.interestFormEndpoint;
+      try { if (url) await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(data) }); } catch (err) {}
+      const list = store.get('signups', []); list.push(data); store.set('signups', list);
+      $('#signup').classList.add('hidden'); $('#thanks').classList.remove('hidden');
+    });
+  });
+  </script>
+</body>
+</html>

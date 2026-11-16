@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your order · Cakearchy</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Caveat+Brush&family=Kaushan+Script&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .count-box { background: var(--bg-brand); border: 3px solid var(--border); border-radius: 20px; box-shadow: var(--shadow); padding: 20px; text-align: center; }
+    .count-box .big { font-family: var(--font-display); font-size: 64px; line-height: 1; }
+    .msg { padding: 12px 16px; border: 2px solid var(--border); border-radius: 16px; max-width: 85%; }
+    .msg.amy { background: var(--bg-brand-subtle); }
+    .msg.me { background: var(--bg-surface); margin-left: auto; }
+    .sketch { aspect-ratio: 4/3; border: 2px dashed var(--border); border-radius: 16px; background: var(--bg-surface); display: flex; align-items: center; justify-content: center; text-align: center; padding: 16px; }
+  </style>
+</head>
+<body>
+  <div id="site-header"></div>
+  <main class="flow">
+    <div class="flow-head"><span class="label muted" id="ref">Order</span><h1 class="flow-title" id="title">YOUR ORDER</h1></div>
+    <div class="flow-body" id="body"></div>
+  </main>
+  <script src="js/config.js"></script>
+  <script src="js/site.js"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const { C, $, store, notice, short, daysUntil, addDays, parse } = window.CA;
+    const quick = new URLSearchParams(location.search).get('type') === 'quick';
+    let o = quick ? store.get('lastQuick', null) : store.get('lastOrder', null);
+    const demo = !o;
+    if (!o) o = { ref: 'CA-DEMO1', name: 'Sophie Turner', occasion: 'kids', who: 'Ava, turning 5', date: addDays(21), slot: '10 to 11am', price: '£78', get: 'collect' };
+    let stage = store.get('trackStage:' + (o.ref || 'quick'), quick ? 3 : 1);
+    const days = daysUntil(o.date || (o.items && o.items[0].date));
+    const date = o.date || o.items[0].date;
+    const stages = quick ? ['Paid', 'Booked in', 'Baking', 'Ready'] : ['Request sent', 'Quote and sketch', 'Deposit paid', 'Design approved', 'Baking', 'Party time'];
+
+    function render() {
+      $('#ref').textContent = (o.ref || 'Quick bake') + (demo ? ' · demo order' : '');
+      $('#title').textContent = quick ? 'YOUR QUICK BAKE' : 'YOUR CAKE';
+      const tl = stages.map((s, i) => `<li class="${i < stage ? 'done' : i === stage ? 'now' : ''}"><span class="d"></span><span><strong>${s}</strong>${i === stage ? '<br><span class="small muted">Happening now</span>' : ''}</span></li>`).join('');
+      let action = '';
+      if (!quick && stage === 1) action = `
+        <div class="summary" style="padding:16px;display:grid;gap:12px"><span class="label brand">Your quote is ready</span>
+          <div class="sketch"><span class="hand">Sketch goes here.<br>Dino in sunglasses, buttercream yellow, chocolate drip.</span></div>
+          <p><strong>${o.price || '£78'}</strong> · ${C.business.depositPercent}% deposit to secure ${short(date)}</p>
+          <button class="btn btn-primary btn-lg btn-block" data-act="approve">Approve and pay deposit</button>
+          <button class="btn btn-outline btn-lg btn-block" data-act="change">Ask for a change</button></div>`;
+      if (!quick && stage === 2) action = notice('good', 'Deposit paid. Your date is locked in.', `Tweaks welcome until ${(() => { const d = parse(date); d.setDate(d.getDate() - C.business.changeCutoffDays); return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long' }); })()}.`) + `<button class="btn btn-primary btn-lg btn-block" data-act="next">Approve final design</button>`;
+      const reminders = notice('info', 'Reminders are on', `I'll text you the day before with your ${o.get === 'deliver' ? 'delivery' : 'collection'} slot (${o.slot || '10 to 11am'}) and tips for getting it home safely.`);
+      $('#body').innerHTML = `
+        <div class="count-box"><span class="label">Countdown to cake</span><div class="big">${Math.max(0, days)} DAYS</div><p>${short(date)} · ${o.slot || ''}</p></div>
+        <div class="timeline"><ul>${tl}</ul></div>
+        ${action}${reminders}
+        <span class="label muted">Messages</span>
+        <div class="form-grid">
+          <div class="msg amy"><strong>Amy</strong><p>Hi ${o.name ? o.name.split(' ')[0] : 'there'}! Thanks for your order. Any questions, just reply here.</p></div>
+          <div id="thread"></div>
+          <div style="display:flex;gap:8px"><input class="input" id="msg" placeholder="Message Amy"><button class="btn btn-primary" data-act="send">Send</button></div>
+        </div>
+        ${demo ? notice('info', 'This is a demo order', 'Place an order to see your own details here. The buttons move the order through each stage so you can preview it.') : ''}
+        <a class="btn btn-outline btn-lg btn-block" href="index.html">Back to Cakearchy</a>`;
+    }
+    $('#body').addEventListener('click', e => {
+      const a = e.target.dataset.act; if (!a) return;
+      if (a === 'approve' || a === 'next') { stage = Math.min(stages.length - 1, stage + 1); store.set('trackStage:' + (o.ref || 'quick'), stage); render(); }
+      if (a === 'change') { $('#msg').value = 'Could we change '; $('#msg').focus(); }
+      if (a === 'send') { const v = $('#msg').value.trim(); if (!v) return; $('#thread').insertAdjacentHTML('beforeend', `<div class="msg me" style="margin-top:12px"><p>${v.replace(/</g, '&lt;')}</p></div><div class="msg amy" style="margin-top:12px"><p class="small muted">Amy usually replies within ${C.business.replyHours} hours.</p></div>`); $('#msg').value = ''; }
+    });
+    render();
+  });
+  </script>
+</body>
+</html>

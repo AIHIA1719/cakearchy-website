@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cakearchy · Cakes without the rules · Harpenden</title>
+  <meta name="description" content="Bold, bright, bespoke celebration cakes and quick bakes, baked to order in Harpenden.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Caveat+Brush&family=Kaushan+Script&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div id="site-header"></div>
+  <main>
+    <!-- 1. Hero with date-first search -->
+    <section class="hero">
+      <div class="wrap">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <span class="sticker butter tilt-l">Baked to order in Harpenden</span>
+            <h1 class="display-xl">CAKES WITHOUT<br>THE RULES.</h1>
+            <p class="lead">Bold, bright, bespoke celebration cakes, baked to order in Harpenden. Tell me the date and I'll tell you straight away if I can do it.</p>
+          </div>
+          <div class="hero-art">
+            <img class="photo" src="assets/img/birthday.jpg" alt="Sprinkle Explosion cake with a pink drip and cherries">
+            <span class="sticker ink tilt-r">Break the rules. Keep the crumbs.</span>
+            <span class="sparkle" style="top:2%;left:-4%;width:34px" data-sparkle></span>
+            <span class="sparkle" style="top:0;right:2%" data-sparkle></span>
+            <span class="sparkle" style="bottom:26%;right:-6%;width:32px" data-sparkle></span>
+          </div>
+        </div>
+
+        <form class="finder" id="finder" aria-label="Check availability">
+          <div class="field-box"><div><label for="f-occ">Occasion</label>
+            <select id="f-occ" name="occasion"></select></div></div>
+          <div class="field-box"><div><label for="f-date">Party date</label>
+            <input id="f-date" name="date" type="date" required></div></div>
+          <div class="field-box"><div><label for="f-guests">Guests</label>
+            <select id="f-guests" name="guests"><option>Up to 15</option><option selected>15 to 30</option><option>30 to 50</option><option>50 to 100</option><option>100+</option></select></div></div>
+          <button class="btn btn-primary btn-lg" type="submit">Check availability</button>
+        </form>
+        <div class="finder-result" id="finder-result" aria-live="polite">
+          <a href="quick-bakes.html" style="font-weight:800">In a hurry? Quick bakes are ready in 3 days →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Shop by occasion -->
+    <section class="section" style="padding-bottom:56px">
+      <div class="wrap">
+        <div class="section-head"><h2>WHAT ARE WE CELEBRATING?</h2><p class="lead">Start with the occasion. Every cake can be tweaked to make it yours.</p></div>
+        <div class="tiles" id="tiles"></div>
+      </div>
+    </section>
+
+    <!-- 3. Quick bakes -->
+    <section class="section bg-soft" id="quick">
+      <div class="wrap">
+        <div class="section-head"><h2>QUICK BAKES</h2><p class="lead" style="color:var(--text)">A short menu of favourites, ready in 3 days. Pick, pay and you're done. No forms, no waiting for a quote.</p></div>
+        <div class="grid-5" id="quick-grid"></div>
+      </div>
+    </section>
+
+    <!-- 4. Lead times -->
+    <section class="section bg-surface">
+      <div class="wrap">
+        <div class="section-head"><h2>HOW FAR AHEAD TO BOOK</h2><p class="lead">Quick bakes in 3 days. Custom cakes need at least 5.</p></div>
+        <div class="grid-4" id="lead-cards"></div>
+        <div class="banner">
+          <div><div class="display-m">LEFT IT LATE? IT HAPPENS.</div><p>Quick bakes are ready in 3 days. Need it even sooner? Message me and I'll try to squeeze you in.</p></div>
+          <a class="btn btn-secondary btn-lg" href="quick-bakes.html">See quick bakes</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Signature cakes -->
+    <section class="section" id="cakes">
+      <div class="wrap">
+        <div class="section-head"><h2>SIGNATURE CAKES</h2><p class="lead">Pick one as it is, or use it as a starting point. Prices include a message on the cake.</p></div>
+        <div class="grid-3" id="sig-grid"></div>
+        <div style="text-align:center;margin-top:40px"><a class="btn btn-secondary btn-lg" href="order.html">Design your own</a></div>
+      </div>
+    </section>
+
+    <!-- 6. How it works -->
+    <section class="section bg-accent" id="how">
+      <div class="wrap">
+        <div class="section-head"><h2>HOW IT WORKS</h2></div>
+        <div class="grid-4">
+          <div class="step-card"><span class="num">1</span><h3>Tell me the plan</h3><p class="muted">Pick a cake or upload your ideas. Two minutes, no DMs needed.</p></div>
+          <div class="step-card"><span class="num">2</span><h3>Get your quote</h3><p class="muted">I reply within 24 hours. A deposit locks in your date.</p></div>
+          <div class="step-card"><span class="num">3</span><h3>Track it</h3><p class="muted">One link shows your design, countdown and reminders. No chasing.</p></div>
+          <div class="step-card"><span class="num">4</span><h3>Party time</h3><p class="muted">Collect free in Harpenden, or delivery up to 5 miles from £6.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Allergies -->
+    <section class="section bg-surface" id="allergies">
+      <div class="wrap split">
+        <div style="display:grid;gap:16px;justify-items:start">
+          <h2>ALLERGIES AND DIETARY NEEDS, HONESTLY</h2>
+          <p class="lead">About 1 in 10 kids at any party has a food intolerance, so this matters. Everything is baked in my home kitchen, which also handles nuts, gluten, eggs and dairy. Here's exactly what I can and can't do.</p>
+          <a class="btn btn-outline btn-lg" href="allergens.html">Read the allergen info</a>
+        </div>
+        <div style="display:grid;gap:12px">
+          <div class="notice info"><div><strong class="label">Yes, on request</strong><p>Egg-free and vegan sponges, dairy-free buttercream, lower sugar for little ones.</p></div></div>
+          <div class="notice good"><div><strong class="label">Made without, but not guaranteed</strong><p>Gluten-free ingredients are available, but it isn't safe for coeliacs because of my kitchen.</p></div></div>
+          <div class="notice" style="background:var(--bg-brand-subtle)"><div><strong class="label">I can't promise</strong><p>Nut-free. If anyone has a severe allergy, message me first and I'll be honest with you.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Weddings -->
+    <section class="section bg-ink" id="weddings">
+      <div class="wrap split">
+        <img src="assets/img/wedding.jpg" alt="Three-tier cream wedding cake with pink piping, cherries and a gold crown" style="border:3px solid var(--pink-200);border-radius:24px;max-width:480px;width:100%">
+        <div style="display:grid;gap:20px;justify-items:start">
+          <h2>THE WEDDING COLLECTION</h2>
+          <p class="lead" style="color:#fff">Grown-up, still a little bit rebellious. Tiered cakes, dessert tables and cupcake towers designed around your day. Two tiers serve around 60, three tiers around 100. Prices from £250, with delivery and set-up included locally.</p>
+          <a class="btn btn-secondary btn-lg" href="order.html?occasion=wedding">Book a tasting</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. Instagram -->
+    <section class="section bg-subtle">
+      <div class="wrap">
+        <div class="section-head"><h2>JOIN THE CAKEARCHY</h2><span class="hand brand">@cakearchy</span></div>
+        <div class="ig-grid">
+          <img src="assets/img/kids.jpg" alt="Dino Disco cake" loading="lazy">
+          <img src="assets/img/cupcakes.jpg" alt="Party cupcakes with cherries" loading="lazy">
+          <img src="assets/img/himher.jpg" alt="Black and pink Lambeth cake" loading="lazy">
+          <img src="assets/img/bespoke.jpg" alt="Heart-shaped pink Lambeth cake" loading="lazy">
+        </div>
+        <div style="text-align:center;margin-top:40px"><a class="btn btn-outline btn-lg" href="https://instagram.com/cakearchy">Follow on Instagram</a></div>
+      </div>
+    </section>
+
+    <!-- 10. FAQ -->
+    <section class="section" id="faq">
+      <div class="wrap">
+        <div class="section-head"><h2>QUICK ANSWERS</h2></div>
+        <div class="faq">
+          <details open><summary>How far ahead should I book?</summary><p>Quick bakes need 3 days. Celebration cakes need at least 5 days, bespoke 3 to 4 weeks, and weddings 3 to 12 months. Check your date at the top of the page to see straight away.</p></details>
+          <details><summary>Do you deliver?</summary><p>Yes, up to 5 miles from Harpenden. It's £6 within Harpenden and £10 up to 5 miles. Collection from Harpenden is free.</p></details>
+          <details><summary>How does the deposit work?</summary><p>For custom cakes, a 30% deposit secures your date and the rest is due a week before collection. Quick bakes are paid in full when you order.</p></details>
+          <details><summary>Can I change my design?</summary><p>Of course, up to 7 days before collection. After that the ingredients are bought and the decorating is underway.</p></details>
+          <details><summary>What if I need to cancel?</summary><p>Let me know as soon as you can. Custom cake deposits are refundable up to 14 days before your date. Quick bakes can be cancelled free up to 48 hours before.</p></details>
+        </div>
+      </div>
+    </section>
+  </main>
+  <div id="site-footer"></div>
+
+  <script src="js/config.js"></script>
+  <script src="js/site.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your basket · Cakearchy</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Caveat+Brush&family=Kaushan+Script&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .line { display: flex; gap: 12px; align-items: center; padding: 12px; border: 2px solid var(--border); border-radius: 16px; background: var(--bg-surface); }
+    .line img { width: 64px; height: 64px; border-radius: 12px; border: 2px solid var(--border); object-fit: cover; }
+    .line .x { background: none; border: 0; font-weight: 800; text-decoration: underline; cursor: pointer; color: var(--text-2); font-size: 13px; }
+    .pay { display: flex; justify-content: center; align-items: center; padding: 16px; border-radius: 999px; border: 2px solid var(--border); font-weight: 800; cursor: pointer; width: 100%; }
+    .pay.wallet { background: var(--bg-inverse); color: #fff; }
+    .pay.card { background: var(--bg-surface); }
+  </style>
+</head>
+<body>
+  <div id="site-header"></div>
+  <main class="flow">
+    <div class="flow-head"><div class="row"><a class="back" href="quick-bakes.html" aria-label="Back to quick bakes" data-icon="back"></a><span class="label">Your basket</span></div><div class="flow-title" id="title">YOUR BASKET</div></div>
+
+    <div class="flow-body" id="empty" hidden>
+      <p class="lead">Nothing in here yet.</p>
+      <a class="btn btn-primary btn-lg btn-block" href="quick-bakes.html">See quick bakes</a>
+    </div>
+
+    <form class="flow-body" id="checkout" novalidate>
+      <div class="form-grid" id="lines"></div>
+      <div id="upsell"></div>
+
+      <span class="label muted">How will it get to you?</span>
+      <label class="choice"><input type="radio" name="get" value="collect" checked><span class="dot"></span><span class="txt"><strong>Collect from Harpenden</strong><small>Free. Exact address sent once your order is confirmed</small></span><span class="amt">Free</span></label>
+      <label class="choice"><input type="radio" name="get" value="deliver"><span class="dot"></span><span class="txt"><strong>Local delivery</strong><small>Up to 5 miles from Harpenden</small></span><span class="amt">From £6</span></label>
+      <div class="field hidden" id="pc-wrap"><label class="label" for="pc">Delivery postcode</label><input class="input" id="pc" autocomplete="postal-code" placeholder="AL5 2AB"><div id="pc-msg" style="margin-top:10px"></div></div>
+      <div class="field"><label class="label" for="slot">Time slot</label>
+        <select class="input" id="slot"><option>9 to 10am</option><option selected>10 to 11am</option><option>11am to 12pm</option><option>Friday evening, 5 to 7pm</option></select></div>
+
+      <span class="label muted">Your details</span>
+      <div class="field"><label class="label" for="name">Name</label><input class="input" id="name" autocomplete="name" required></div>
+      <div class="field"><label class="label" for="mobile">Mobile</label><input class="input" id="mobile" type="tel" autocomplete="tel" required></div>
+      <div class="field"><label class="label" for="email">Email</label><input class="input" id="email" type="email" autocomplete="email" required></div>
+      <label class="choice"><input type="checkbox" id="allergen-ok"><span class="box"></span><span class="txt"><strong>I've checked the allergen information</strong><small id="allergen-line">Made in a kitchen that handles nuts, gluten, eggs and dairy.</small></span></label>
+      <div id="err"></div>
+
+      <span class="label muted">Pay</span>
+      <button class="pay wallet" type="submit">Pay with Apple Pay or Google Pay</button>
+      <button class="pay card" type="submit">Pay by card</button>
+      <p class="small muted">Free cancellation up to 48 hours before collection. Payments aren't live on this preview, so nothing will be charged.</p>
+    </form>
+
+    <div class="flow-bar" id="bar"><div class="total"><span class="label muted">Total</span><div class="price" id="total">£0</div></div><button class="btn btn-primary btn-lg" form="checkout" type="submit" id="pay-btn">Pay</button></div>
+  </main>
+
+  <main class="flow hidden" id="done" style="background:var(--bg-accent)">
+    <div class="flow-body" style="text-align:center;justify-items:center;padding-top:48px">
+      <span class="sticker tilt-l">Paid and booked. Easy.</span>
+      <h1 class="display-xl" style="font-size:60px">YOU'RE ALL SET!</h1>
+      <p class="lead" style="color:var(--text)" id="done-msg"></p>
+      <div class="timeline" style="text-align:left;width:100%"><strong class="label brand">What happens next</strong>
+        <ul><li><span class="d"></span><span>The day before: a text reminder with your slot</span></li><li><span class="d"></span><span>On the day: grab your box and carry it flat</span></li><li><span class="d"></span><span>After the party: tag @cakearchy so I can see the chaos</span></li></ul></div>
+      <a class="btn btn-primary btn-lg btn-block" href="track.html?type=quick">View my order</a>
+      <a class="btn btn-outline btn-lg btn-block" href="order.html">Planning something bigger? Get a custom quote</a>
+    </div>
+  </main>
+  <script src="js/config.js"></script>
+  <script src="js/site.js"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const { C, $, $$, basket, money, notice, deliveryQuote, short, ICON, store } = window.CA;
+    $$('[data-icon]').forEach(e => e.innerHTML = ICON[e.dataset.icon]);
+    let delivery = 0;
+    const render = () => {
+      const items = basket.items();
+      if (!items.length) { $('#empty').hidden = false; $('#checkout').classList.add('hidden'); $('#bar').classList.add('hidden'); return; }
+      $('#lines').innerHTML = items.map(i => `<div class="line"><img src="${i.img}" alt=""><div style="flex:1"><h4>${i.name}</h4><p class="small muted">${i.details || ''}</p><p class="small"><strong>${short(i.date)}</strong> · <button type="button" class="x" data-remove="${i.key}">Remove</button></p></div><strong>${money(i.price)}</strong></div>`).join('');
+      const hasCup = items.some(i => i.id === 'classic' || i.id === 'party');
+      $('#upsell').innerHTML = hasCup ? '' : notice('good', 'Add 6 classic cupcakes for £15?', 'Handy for party bags or the grown-ups. <a href="quick-bakes.html?item=classic">Add them</a>');
+      const all = [...new Set(items.flatMap(i => (i.allergens || '').split(/, | and /)))].filter(Boolean);
+      $('#allergen-line').textContent = `Contains ${all.join(', ')}. Made in a kitchen that handles nuts, gluten, eggs and dairy.`;
+      const t = basket.total() + delivery; $('#total').textContent = money(t); $('#pay-btn').textContent = 'Pay ' + money(t);
+    };
+    $('#lines').addEventListener('click', e => { const k = e.target.dataset.remove; if (k) { basket.remove(Number(k)); render(); } });
+    $$('input[name=get]').forEach(r => r.addEventListener('change', () => { const d = $('input[name=get]:checked').value === 'deliver'; $('#pc-wrap').classList.toggle('hidden', !d); if (!d) delivery = 0; render(); }));
+    $('#pc').addEventListener('input', () => { const q = deliveryQuote($('#pc').value); delivery = q.ok ? q.fee : 0;
+      $('#pc-msg').innerHTML = $('#pc').value.length < 2 ? '' : notice(q.ok ? 'good' : 'warn', q.msg, q.ok ? 'Delivered in your chosen slot.' : 'Switch to collection, or message me.'); render(); });
+    $('#checkout').addEventListener('submit', e => {
+      e.preventDefault();
+      const miss = ['name', 'mobile', 'email'].filter(id => !$('#' + id).value.trim());
+      if (miss.length || !$('#allergen-ok').checked || ($('input[name=get]:checked').value === 'deliver' && !delivery)) {
+        $('#err').innerHTML = notice('warn', 'Nearly there', [miss.length ? 'Fill in your name, mobile and email.' : '', !$('#allergen-ok').checked ? 'Tick to confirm you\'ve checked the allergens.' : '', ($('input[name=get]:checked').value === 'deliver' && !delivery) ? 'Add a postcode inside the delivery area.' : ''].filter(Boolean).join(' '));
+        return;
+      }
+      const items = basket.items(); const first = items[0];
+      const taken = store.get('taken', {}); items.forEach(i => taken[i.date] = (taken[i.date] || 0) + 1); store.set('taken', taken);
+      store.set('lastQuick', { items, name: $('#name').value, total: basket.total() + delivery, slot: $('#slot').value, get: $('input[name=get]:checked').value });
+      $('#done-msg').textContent = `Thanks ${$('#name').value.split(' ')[0]}. ${items.length > 1 ? 'Your bakes' : 'Your ' + first.name.toLowerCase()} will be ready on ${short(first.date)}, ${$('#slot').value}. I've texted you the details and a link to your order.`;
+      basket.clear(); document.querySelector('main.flow').classList.add('hidden'); $('#done').classList.remove('hidden'); window.scrollTo(0, 0);
+    });
+    render();
+  });
+  </script>
+</body>
+</html>
