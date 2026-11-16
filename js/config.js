@@ -55,7 +55,7 @@ window.CAKEARCHY = {
   },
 
   occasions: [
-    { id: 'birthday', name: 'Birthday', from: 45, img: 'assets/img/birthday.jpg', lead: 'celebration' },
+    { id: 'birthday', name: 'Birthday', from: 45, img: 'assets/img/birthday.jpg', lead: 'celebration', bg: 'var(--pink-500)' },
     { id: 'kids', name: 'Kids', from: 55, img: 'assets/img/kids.jpg', lead: 'celebration' },
     { id: 'baby', name: 'Baby', from: 50, img: 'assets/img/baby.jpg', lead: 'celebration' },
     { id: 'himher', name: 'Him/Her', from: 60, img: 'assets/img/himher.jpg', lead: 'celebration' },

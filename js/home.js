@@ -28,8 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Tiles
   $('#tiles').innerHTML = C.occasions.map(o => `
-    <a class="tile" href="${o.id === 'cupcakes' ? 'quick-bakes.html' : 'order.html?occasion=' + o.id}">
-      <img src="${o.img}" alt="" loading="lazy"><div><strong>${o.name.toUpperCase()}</strong><span>From ${money(o.from)}</span></div>
+    <a class="tile" href="${o.id === 'cupcakes' ? 'quick-bakes.html' : 'order.html?occasion=' + o.id}"${o.bg ? ` style="background:${o.bg}"` : ''}>
+      <img src="${o.img}" alt="" loading="lazy"><div><strong>${o.name.toUpperCase()}</strong><span${o.bg ? ' style="color:var(--ink-900)"' : ''}>From ${money(o.from)}</span></div>
     </a>`).join('');
 
   // Quick bakes
