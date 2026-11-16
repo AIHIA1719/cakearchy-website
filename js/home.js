@@ -30,7 +30,11 @@ document.addEventListener('DOMContentLoaded', () => {
   $('#tiles').innerHTML = C.occasions.map(o => `
     <a class="tile" href="${o.id === 'cupcakes' ? 'quick-bakes.html' : 'order.html?occasion=' + o.id}">
       <img src="${o.img}" alt="" loading="lazy"><div><strong>${o.name.toUpperCase()}</strong><span>From ${money(o.from)}</span></div>
-    </a>`).join('');
+    </a>`).join('') + `
+    <a class="tile tile-naughty" href="naughty-step.html" aria-label="The Naughty Step, 18 plus">
+      <div class="tile-18"><span class="pill18">18+</span><span class="tile-hush">Ruder words.<br>Same cake.</span></div>
+      <div><strong>NAUGHTY STEP</strong><span>From ${money(C.naughty[0].from)}</span></div>
+    </a>`;
 
   // Quick bakes
   const sat = (() => { const d = new Date(); d.setDate(d.getDate() + ((6 - d.getDay() + 7) % 7 || 7)); return window.CA.iso(d); })();

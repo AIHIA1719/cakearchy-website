@@ -133,7 +133,7 @@
             <span class="hand" style="color:var(--pink-200)">Thanks for being part of the Cakearchy!</span>
           </div>
           <div class="footer-cols">
-            <div><h5>CAKES</h5><a href="quick-bakes.html">Quick bakes</a><a href="order.html?occasion=birthday">Birthday</a><a href="order.html?occasion=kids">Kids</a><a href="order.html?occasion=baby">Baby</a><a href="order.html?occasion=wedding">Wedding</a></div>
+            <div><h5>CAKES</h5><a href="quick-bakes.html">Quick bakes</a><a href="order.html?occasion=birthday">Birthday</a><a href="order.html?occasion=kids">Kids</a><a href="order.html?occasion=baby">Baby</a><a href="order.html?occasion=wedding">Wedding</a><a href="naughty-step.html">The Naughty Step (18+)</a></div>
             <div><h5>INFO</h5><a href="index.html#how">How it works</a><a href="allergens.html">Allergens</a><a href="index.html#faq">FAQs</a><a href="track.html">Track an order</a></div>
             <div><h5>SAY HELLO</h5><a href="mailto:${C.business.email}">${C.business.email}</a><a href="${C.business.instagram}">Instagram</a><span>Harpenden, Herts</span></div>
           </div>

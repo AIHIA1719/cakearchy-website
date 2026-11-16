@@ -199,7 +199,13 @@ section:first-of-type { border-top: 0; }
 .qb .card-foot { margin-top: auto; padding-top: 4px; }
 
 /* Occasion tiles */
-.tiles { display: grid; grid-template-columns: repeat(7, 1fr); gap: 14px; }
+.tiles { display: grid; grid-template-columns: repeat(8, 1fr); gap: 14px; }
+.tile-naughty { background: var(--ink-900); }
+.tile-naughty strong { color: var(--pink-500); }
+.tile-naughty span { color: var(--pink-200); }
+.tile-naughty .tile-18 { aspect-ratio: 1 / 0.9; border-bottom: 3px solid var(--border); background: var(--pink-500); display: grid; place-content: center; justify-items: center; gap: 8px; padding: 10px; text-align: center; }
+.tile-naughty .pill18 { font-family: var(--font-display); font-size: 40px; line-height: 1; color: #fff; background: var(--ink-900); border: 3px solid #fff; border-radius: 999px; padding: 6px 16px; letter-spacing: .02em; transform: rotate(-6deg); }
+.tile-naughty .tile-hush { color: var(--ink-900); font-size: 12px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; line-height: 1.25; }
 .tile { background: var(--bg-surface); border: 3px solid var(--border); border-radius: 20px; overflow: hidden; box-shadow: var(--shadow); text-decoration: none; transition: transform .1s; }
 .tile:hover { transform: translate(-2px, -2px); }
 .tile img { aspect-ratio: 1 / 0.9; object-fit: cover; width: 100%; border-bottom: 3px solid var(--border); }

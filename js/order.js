@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let S = Object.assign({}, fresh, store.get('draft', {}));
   if (params.get('occasion')) { S = Object.assign({}, fresh, { occasion: params.get('occasion') === 'quick' ? 'birthday' : params.get('occasion') }); }
   if (params.get('date')) S.date = params.get('date');
+  if (params.get('idea')) S.idea = params.get('idea');
   if (params.get('cake')) { S.cake = params.get('cake'); S.start = 'signature'; }
   if (!S.cake) S.cake = (C.signature.find(s => s.occasion.toLowerCase().replace('/', '') === S.occasion) || C.signature[0]).id;
 
@@ -66,6 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return `<p class="muted intro-line">Fill out this short form and I'll give you a ring to go through exactly what you're after.</p>
         ${label('Occasion')}${chips('occasion', C.occasions.filter(o => o.id !== 'cupcakes').map(o => o.name), occ().name)}
         ${field('who', isWedding() ? 'Your names' : 'Whose party is it?', S.who, 'placeholder="' + (isWedding() ? 'Sam and Alex' : 'Ava, turning 5') + '"')}
+        ${S.occasion === 'himher' ? `<p class="muted" style="font-size:14px">Fancy something ruder? <a href="naughty-step.html" style="font-weight:800">Visit the Naughty Step (18+)</a></p>` : ''}
         <div class="field"><label class="label" for="idea">What have you got in mind? <span class="muted" style="text-transform:none;letter-spacing:0;font-weight:600">(optional)</span></label>
           <textarea class="input" id="idea" name="idea" rows="3" placeholder="${isWedding() ? 'Three tiers, white and gold, fresh flowers' : 'Unicorn theme, pink and purple, she loves chocolate'}">${(S.idea || '').replace(/</g, '&lt;')}</textarea>
           <small class="muted">A few words is plenty. We'll fill in the rest on the phone.</small></div>

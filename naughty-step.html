@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>The Naughty Step (18+) · Cakearchy</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Caveat+Brush&family=Kaushan+Script&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css?v=8">
+  <style>
+    .ns-hero { background: var(--ink-900); color: #fff; border-bottom: 3px solid var(--border); }
+    .ns-hero .wrap { padding: 56px 20px 48px; display: grid; gap: 14px; max-width: 900px; }
+    .ns-hero h1 { color: var(--pink-500); -webkit-text-stroke: 2px #fff; paint-order: stroke fill; }
+    .ns-hero p { color: var(--pink-200); font-size: 18px; max-width: 560px; }
+    .badge-18 { justify-self: start; background: var(--pink-500); color: #fff; font-family: var(--font-display); font-size: 22px; letter-spacing: .04em; border: 3px solid #fff; border-radius: 999px; padding: 4px 16px; transform: rotate(-4deg); }
+    .ns-grid { display: grid; gap: 24px; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+    .ns-card .pic { position: relative; border-bottom: 3px solid var(--border); }
+    .ns-card .pic img { aspect-ratio: 1 / .85; object-fit: cover; width: 100%; display: block; }
+    .bleep { position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%) rotate(-3deg); background: var(--ink-900); color: #fff; font-family: var(--font-display); font-size: 22px; letter-spacing: .03em; padding: 6px 14px; border-radius: 10px; border: 2px solid #fff; white-space: nowrap; box-shadow: 3px 3px 0 var(--pink-500); }
+    .card-body h3 { font-family: var(--font-display); font-size: 26px; letter-spacing: .02em; line-height: 1.05; }
+    .gate { position: fixed; inset: 0; z-index: 100; background: rgba(26, 18, 22, .92); display: grid; place-items: center; padding: 20px; }
+    .gate-box { background: var(--bg-surface); border: 3px solid var(--border); border-radius: var(--r-lg); box-shadow: var(--shadow); max-width: 420px; width: 100%; padding: 32px 24px; display: grid; gap: 14px; text-align: center; }
+    .gate-box h2 { font-family: var(--font-display); font-size: 40px; line-height: 1; color: var(--pink-500); -webkit-text-stroke: 1.5px var(--ink-900); paint-order: stroke fill; }
+    .gate-box .btns { display: grid; gap: 10px; margin-top: 6px; }
+    .rules { display: grid; gap: 8px; }
+    .rules li { margin-left: 20px; }
+  </style>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title">
+    <div class="gate-box">
+      <h2 id="gate-title">GROWN-UPS ONLY</h2>
+      <p>This bit of the menu has swearing on it. Are you 18 or over?</p>
+      <div class="btns">
+        <button class="btn btn-primary btn-lg" id="gate-yes" type="button">Yes, I'm 18 or over</button>
+        <a class="btn btn-secondary btn-lg" href="index.html">No, take me back</a>
+      </div>
+    </div>
+  </div>
+
+  <main id="ns-main" hidden>
+    <section class="ns-hero">
+      <div class="wrap">
+        <span class="badge-18">18+</span>
+        <h1 class="display-l">THE NAUGHTY STEP</h1>
+        <p>Same gorgeous cakes, ruder words. For big birthdays, leaving dos and anyone who's had quite enough, thank you.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap" style="display:grid;gap:32px">
+        <div class="ns-grid" id="ns-grid"></div>
+
+        <div class="notice info"><div><strong>Got your own rude idea?</strong><p>Pick the closest cake and change the wording in the request form. I'll spell it out in full on the cake, bleeps not included.</p></div></div>
+
+        <div class="card" style="padding:24px;gap:10px">
+          <h3 style="font-family:var(--font-display);font-size:28px">HOUSE RULES</h3>
+          <p>Cheeky is good. Nasty isn't. I won't pipe anything that's:</p>
+          <ul class="rules">
+            <li>hateful about anyone's race, religion, gender, sexuality or disability</li>
+            <li>aimed at a real person to embarrass or upset them</li>
+            <li>for a party where kids will see it, unless you're happy to keep it out of sight</li>
+          </ul>
+          <p class="muted">If I'm not comfortable with a message, I'll ring you and we'll find something just as funny.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="js/config.js?v=8"></script>
+  <script src="js/site.js?v=8"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const { C, money } = window.CA;
+      const KEY = 'ca-over18';
+      const ok = () => { try { return localStorage.getItem(KEY) === 'yes'; } catch (e) { return false; } };
+      const open = () => {
+        document.getElementById('gate').remove();
+        document.getElementById('ns-main').hidden = false;
+        document.getElementById('ns-grid').innerHTML = C.naughty.map(c => `
+          <article class="card ns-card">
+            <div class="pic"><img src="${c.img}" alt="" loading="lazy"><span class="bleep">${c.name}</span></div>
+            <div class="card-body"><h3>${c.name.toUpperCase()}</h3><p class="muted">${c.desc}</p></div>
+            <div class="card-foot"><strong>From ${money(c.from)}</strong>
+              <a class="btn btn-primary" href="order.html?occasion=himher&idea=${encodeURIComponent(c.name + ' cake')}">Request this</a></div>
+          </article>`).join('');
+      };
+      if (ok()) open();
+      document.getElementById('gate-yes').addEventListener('click', () => { try { localStorage.setItem(KEY, 'yes'); } catch (e) {} open(); });
+    });
+  </script>
+</body>
+</html>
