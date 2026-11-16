@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const params = new URLSearchParams(location.search);
   const fresh = {
-    step: 0, occasion: 'birthday', who: '', date: addDays(21), size: 'm8', addons: [], start: 'signature', cake: '', colours: [], message: '', notes: '',
+    step: 0, occasion: 'birthday', who: '', date: addDays(21), size: 'm8', addons: [], start: 'signature', cake: '', colours: [], message: '', notes: '', idea: '',
     needs: 'no', avoid: [], diet: [], severity: 'mild', flavour: 'Vanilla', other: '', get: 'collect', postcode: '', slot: '10 to 11am',
     name: '', mobile: '', email: '', texts: true, surprise: false, allergenOk: false, files: 0
   };
@@ -63,8 +63,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const steps = [
     { title: () => 'WHAT ARE WE CELEBRATING?', render: () => {
       const a = availability(S.date, leadType());
-      return `${label('Occasion')}${chips('occasion', C.occasions.filter(o => o.id !== 'cupcakes').map(o => o.name), occ().name)}
+      return `<p class="muted intro-line">Fill out this short form and I'll give you a ring to go through exactly what you're after.</p>
+        ${label('Occasion')}${chips('occasion', C.occasions.filter(o => o.id !== 'cupcakes').map(o => o.name), occ().name)}
         ${field('who', isWedding() ? 'Your names' : 'Whose party is it?', S.who, 'placeholder="' + (isWedding() ? 'Sam and Alex' : 'Ava, turning 5') + '"')}
+        <div class="field"><label class="label" for="idea">What have you got in mind? <span class="muted" style="text-transform:none;letter-spacing:0;font-weight:600">(optional)</span></label>
+          <textarea class="input" id="idea" name="idea" rows="3" placeholder="${isWedding() ? 'Three tiers, white and gold, fresh flowers' : 'Unicorn theme, pink and purple, she loves chocolate'}">${(S.idea || '').replace(/</g, '&lt;')}</textarea>
+          <small class="muted">A few words is plenty. We'll fill in the rest on the phone.</small></div>
         ${field('date', 'Date', S.date, `type="date" min="${addDays(0)}"`)}
         <div id="date-msg">${a.status === 'free' ? notice('good', a.title, a.body + ' Send your request soon to hold it.') : a.status === 'none' ? '' : notice('warn', a.title, a.body + (a.quickOk ? ' <a href="quick-bakes.html" style="color:#fff">See quick bakes</a>' : ''))}</div>
         ${a.status === 'free' ? notice('info', daysUntil(S.date) >= 14 ? 'You\'re in plenty of time' : 'Good timing', `I need at least ${C.leadTimes[leadType()]} days' notice for this. You've got ${daysUntil(S.date)}.`) : ''}`;
@@ -137,6 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const sig = C.signature.find(s => s.id === S.cake); const size = C.sizes.find(s => s.id === S.size); const al = allergy();
       const rows = [
         ['Occasion', `${occ().name}${S.who ? ' · ' + S.who : ''}`, 0],
+        ...(S.idea && S.idea.trim() ? [['Your idea', S.idea.replace(/</g, '&lt;'), 0]] : []),
         ['Date', `${pretty(S.date)}, ${S.get === 'deliver' ? 'delivered to ' + S.postcode.toUpperCase() : 'collect'} ${S.slot}`, 0],
         ['Size', isWedding() ? ({ w60: 'Two tiers, around 60', w100: 'Three tiers, around 100', w150: 'Four tiers or dessert table, 150+' }[S.wsize || 'w100']) : `${size.name}, ${size.note.toLowerCase()}${S.addons.length ? ', plus ' + S.addons.map(id => C.addOns.find(a => a.id === id).name.toLowerCase()).join(' and ') : ''}`, 1],
         ['Look', `${S.start === 'signature' && sig ? sig.name : 'My own design' + (S.files ? ` (${S.files} photo${S.files > 1 ? 's' : ''})` : '')}${S.colours.length ? '. ' + S.colours.join(' and ') : ''}${S.message ? `. "${S.message}"` : ''}`, 2],
@@ -144,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ['Contact', `${S.name} · ${S.texts ? 'texts on' : 'email only'}${S.surprise ? ' · surprise' : ''}`, 4]
       ];
       return `<div class="summary">${rows.map(([l, v, st]) => `<div class="row"><div><span class="label muted">${l}</span><p>${v}</p></div><button type="button" class="edit" data-goto="${st}">Edit</button></div>`).join('')}</div>
-        ${notice('info', 'What happens next', `I'll reply within ${C.business.replyHours} hours with a final price and a quick sketch. Nothing to pay until you're happy. A ${C.business.depositPercent}% deposit then locks in your date.`)}
+        ${notice('info', 'What happens next', `I'll give you a ring within ${C.business.replyHours} hours to go through the details, then send a final price and a quick sketch. Nothing to pay until you're happy. A ${C.business.depositPercent}% deposit then locks in your date.`)}
         ${choice('checkbox', 'allergenOk', '1', 'I\'ve read the allergen information', 'My kitchen handles all 14 major allergens', '', S.allergenOk)}`;
     }, valid: () => S.allergenOk || 'Tick to confirm you\'ve read the allergen information', cta: () => 'Send my request' }
   ];
