@@ -55,7 +55,7 @@ window.CAKEARCHY = {
   },
 
   occasions: [
-    { id: 'birthday', name: 'Birthday', from: 45, img: 'assets/img/birthday.jpg', lead: 'celebration', bg: 'var(--pink-500)' },
+    { id: 'birthday', name: 'Birthday', from: 45, img: 'assets/img/birthday-tile.jpg', lead: 'celebration' },
     { id: 'kids', name: 'Kids', from: 55, img: 'assets/img/kids.jpg', lead: 'celebration' },
     { id: 'baby', name: 'Baby', from: 50, img: 'assets/img/baby.jpg', lead: 'celebration' },
     { id: 'himher', name: 'Him/Her', from: 60, img: 'assets/img/himher.jpg', lead: 'celebration' },
@@ -101,7 +101,7 @@ window.CAKEARCHY = {
   signature: [
     { id: 'sprinkle', name: 'Sprinkle Explosion', occasion: 'Birthday', img: 'assets/img/birthday.jpg', from: 45, desc: 'Vanilla sponge, raspberry jam and enough sprinkles to make a grown-up giggle.' },
     { id: 'dino', name: 'Dino Disco', occasion: 'Kids', img: 'assets/img/kids.jpg', from: 55, desc: 'Chocolate fudge layers with a dinosaur who definitely came to party.' },
-    { id: 'hello', name: 'Hello Little One', occasion: 'Baby', img: 'assets/img/baby.jpg', from: 50, desc: 'Soft lemon sponge in bubblegum or butter tones, with a little gold crown.' },
+    { id: 'hello', name: 'Hello Little One', occasion: 'Baby', img: 'assets/img/baby.jpg', from: 50, desc: 'In 2 colourways for boys or girls.' },
     { id: 'fancy', name: 'Fancy Pants', occasion: 'Him/Her', img: 'assets/img/himher.jpg', from: 60, desc: 'A black and pink Lambeth cake with cherries on top. Rules optional.' },
     { id: 'crew', name: 'Cupcake Crew', occasion: 'Cupcakes', img: 'assets/img/cupcakes.jpg', from: 18, desc: 'Swirls, sprinkles and a cherry on top. Sold in sixes and twelves.' },
     { id: 'totally', name: 'Totally You', occasion: 'Bespoke', img: 'assets/img/bespoke.jpg', from: 75, desc: 'A heart-shaped Lambeth cake and the starting point for any idea you have.' }
