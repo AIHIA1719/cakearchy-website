@@ -1,4 +1,7 @@
 /* Festive overlay: snowflakes and sprinkles drifting down the homepage.
+   - On page load: snow falls over the whole screen.
+   - As soon as the visitor scrolls: it fades away.
+   - Back at the top: it gently returns, but only falls as far as the date search form.
    Turn it on or off, and set the dates, in js/config.js (festive). */
 (function () {
   const F = (window.CAKEARCHY || {}).festive;
@@ -14,18 +17,23 @@
   document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.createElement('canvas');
     canvas.setAttribute('aria-hidden', 'true');
-    canvas.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:30';
+    canvas.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:30;transition:opacity 1.2s ease';
     document.body.appendChild(canvas);
     const ctx = canvas.getContext('2d');
 
     const btn = document.createElement('button');
     btn.type = 'button'; btn.className = 'btn btn-outline';
-    btn.style.cssText = 'position:fixed;right:16px;bottom:16px;z-index:35;width:48px;height:48px;padding:0;font-size:22px;box-shadow:var(--shadow-sm)';
+    btn.style.cssText = 'position:fixed;right:16px;bottom:16px;z-index:35;width:48px;height:48px;padding:0;font-size:22px;box-shadow:var(--shadow-sm);transition:opacity 1.2s ease';
     document.body.appendChild(btn);
 
+    const form = document.getElementById('finder');
     const colours = ['#E34278', '#F7DD9E', '#F1AEC7', '#C1282B', '#FFFFFF', '#5BB8D6'];
     let W, H, parts = [], running = false, raf;
+    let mode = 'full';      // 'full' on first load, 'hero' after coming back to the top
+    let shown = true;       // false while faded out by scrolling
+
     const resize = () => { const r = window.devicePixelRatio || 1; W = innerWidth; H = innerHeight; canvas.width = W * r; canvas.height = H * r; ctx.setTransform(r, 0, 0, r, 0, 0); };
+    const limit = () => mode === 'hero' && form ? Math.max(0, form.getBoundingClientRect().top) : H;
     const make = (y) => {
       const flake = Math.random() < 0.55;
       return { x: Math.random() * W, y: y ?? -20, r: flake ? 5 + Math.random() * 6 : 2.5 + Math.random() * 1.5, len: 8 + Math.random() * 6,
@@ -48,37 +56,48 @@
     };
     const tick = () => {
       ctx.clearRect(0, 0, W, H);
+      const bottom = limit();
+      ctx.save(); ctx.beginPath(); ctx.rect(0, 0, W, bottom); ctx.clip();
       for (const p of parts) {
         p.sway += 0.02; p.y += p.vy; p.x += p.vx + Math.sin(p.sway) * 0.35; p.rot += p.vr;
-        if (p.y > H + 20) Object.assign(p, make());
+        if (p.y > bottom + 20) Object.assign(p, make());
         p.flake ? drawFlake(p) : drawSprinkle(p);
       }
+      ctx.restore();
       raf = requestAnimationFrame(tick);
     };
-    const start = () => { if (running) return; running = true; resize(); parts = Array.from({ length: count() }, () => make(Math.random() * H)); canvas.style.display = ''; tick(); };
-    const stop = () => { running = false; cancelAnimationFrame(raf); ctx.clearRect(0, 0, W, H); canvas.style.display = 'none'; };
-    const label = () => { btn.textContent = '❄'; btn.style.opacity = off ? '.55' : '1'; btn.title = off ? 'Let it snow' : 'Stop the snow'; btn.setAttribute('aria-label', btn.title); btn.setAttribute('aria-pressed', String(!off)); };
+    const seed = () => { const b = limit(); parts = Array.from({ length: mode === 'hero' ? Math.round(count() * Math.max(0.35, b / H)) : count() }, () => make(Math.random() * b)); };
+    const start = () => { if (running) return; running = true; resize(); seed(); canvas.style.display = ''; tick(); };
+    const stop = () => { running = false; cancelAnimationFrame(raf); ctx.clearRect(0, 0, W, H); };
+    const label = () => { btn.textContent = '❄'; btn.title = off ? 'Let it snow' : 'Stop the snow'; btn.setAttribute('aria-label', btn.title); btn.setAttribute('aria-pressed', String(!off)); btn.style.filter = off ? 'grayscale(1)' : ''; };
 
-    // Snow only shows when the page first loads. As soon as someone starts
-    // scrolling it fades away for good (until the next page load).
-    let faded = false;
-    canvas.style.transition = btn.style.transition = 'opacity 1.2s ease';
-    const fade = () => {
-      if (faded || scrollY < 10) return;
-      faded = true;
-      removeEventListener('scroll', fade);
-      canvas.style.opacity = '0'; btn.style.opacity = '0'; btn.style.pointerEvents = 'none';
-      setTimeout(() => { running = false; cancelAnimationFrame(raf); canvas.remove(); btn.remove(); }, 1300);
+    let hideTimer;
+    const hide = () => {
+      shown = false; canvas.style.opacity = '0'; btn.style.opacity = '0'; btn.style.pointerEvents = 'none';
+      clearTimeout(hideTimer); hideTimer = setTimeout(() => { if (!shown) stop(); }, 1250);
     };
-    addEventListener('scroll', fade, { passive: true });
+    const show = () => {
+      shown = true; clearTimeout(hideTimer); mode = 'hero';
+      btn.style.opacity = '1'; btn.style.pointerEvents = '';
+      if (!off) { stop(); start(); canvas.style.opacity = '0'; requestAnimationFrame(() => { canvas.style.opacity = '1'; }); }
+    };
+    const onScroll = () => {
+      const atTop = scrollY < 10;
+      if (!atTop && shown) hide();
+      else if (atTop && !shown) show();
+    };
+    addEventListener('scroll', onScroll, { passive: true });
 
-    btn.addEventListener('click', () => { off = !off; try { localStorage.setItem('cakearchy:snowOff', off ? '1' : '0'); } catch (e) {} label(); off ? stop() : start(); });
+    btn.addEventListener('click', () => {
+      off = !off; try { localStorage.setItem('cakearchy:snowOff', off ? '1' : '0'); } catch (e) {}
+      label(); if (off) { stop(); canvas.style.opacity = '0'; } else { start(); canvas.style.opacity = '1'; }
+    });
     addEventListener('resize', () => { if (running) resize(); });
-    document.addEventListener('visibilitychange', () => { if (document.hidden) { cancelAnimationFrame(raf); } else if (running && !faded) { tick(); } });
+    document.addEventListener('visibilitychange', () => { if (document.hidden) cancelAnimationFrame(raf); else if (running) tick(); });
 
     if (reduce) off = true;
     label();
-    if (!off) start(); else canvas.style.display = 'none';
-    fade();
+    if (!off) start(); else canvas.style.opacity = '0';
+    onScroll();
   });
 })();
