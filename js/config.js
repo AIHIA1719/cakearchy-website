@@ -109,10 +109,10 @@ window.CAKEARCHY = {
 
   // The Naughty Step: 18+ range. Names are bleeped on the site, spelled out on the cake.
   naughty: [
-    { id: 'llfo', name: 'Live, Laugh, F*** Off', img: 'assets/img/classic.jpg', from: 24, desc: 'A box of six pretty cupcakes, spelling it out one word at a time.' },
-    { id: 'oaf', name: 'Old As F***', img: 'assets/img/choc.jpg', from: 50, desc: 'Chocolate fudge layers with your number on top. Ideal for 40, 50 and beyond.' },
-    { id: 'hfb', name: 'Happy F***ing Birthday', img: 'assets/img/himher.jpg', from: 45, desc: 'A classic birthday cake with an extra word that does a lot of heavy lifting.' },
-    { id: 'ws', name: 'Well, S***.', img: 'assets/img/bespoke.jpg', from: 50, desc: 'For leaving dos, big birthdays and anything that deserves a dramatic sigh.' }
+    { id: 'llfo', name: 'Live, Laugh, F*** Off', img: 'assets/img/naughty-llfo.jpg', from: 24, desc: 'A box of six pretty cupcakes, spelling it out one word at a time.' },
+    { id: 'oaf', name: 'Old As F***', img: 'assets/img/naughty-oaf.jpg', from: 50, desc: 'Chocolate fudge layers, a glittery number and enough candles to set off the smoke alarm.' },
+    { id: 'hfb', name: 'Happy F***ing Birthday', img: 'assets/img/naughty-hfb.jpg', from: 45, desc: 'Retro frills, cherries on top and an extra word that does a lot of heavy lifting.' },
+    { id: 'ws', name: 'Well, S***.', img: 'assets/img/naughty-ws.jpg', from: 50, desc: 'For leaving dos, break-ups and anything that deserves a dramatic sigh. Knife not included.' }
   ],
 
   // Request builder sizes

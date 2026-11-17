@@ -8,7 +8,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Caveat+Brush&family=Kaushan+Script&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=11">
+  <link rel="stylesheet" href="css/styles.css?v=12">
   <style>
     .ns-hero { background: var(--ink-900); color: #fff; border-bottom: 3px solid var(--border); }
     .ns-hero .wrap { padding: 56px 20px 48px; display: grid; gap: 14px; max-width: 900px; }
@@ -17,7 +17,7 @@
     .badge-18 { justify-self: start; background: var(--pink-500); color: #fff; font-family: var(--font-display); font-size: 22px; letter-spacing: .04em; border: 3px solid #fff; border-radius: 999px; padding: 4px 16px; transform: rotate(-4deg); }
     .ns-grid { display: grid; gap: 24px; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
     .ns-card .pic { position: relative; border-bottom: 3px solid var(--border); }
-    .ns-card .pic img { aspect-ratio: 1 / .85; object-fit: cover; width: 100%; display: block; }
+    .ns-card .pic img { aspect-ratio: 1 / 1; object-fit: cover; width: 100%; display: block; }
     .bleep { position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%) rotate(-3deg); background: var(--ink-900); color: #fff; font-family: var(--font-display); font-size: 22px; letter-spacing: .03em; padding: 6px 14px; border-radius: 10px; border: 2px solid #fff; white-space: nowrap; box-shadow: 3px 3px 0 var(--pink-500); }
     .card-body h3 { font-family: var(--font-display); font-size: 26px; letter-spacing: .02em; line-height: 1.05; }
     .gate { position: fixed; inset: 0; z-index: 100; background: rgba(26, 18, 22, .92); display: grid; place-items: center; padding: 20px; }
@@ -72,8 +72,8 @@
   </main>
 
   <div id="site-footer"></div>
-  <script src="js/config.js?v=11"></script>
-  <script src="js/site.js?v=11"></script>
+  <script src="js/config.js?v=12"></script>
+  <script src="js/site.js?v=12"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const { C, money } = window.CA;
@@ -84,7 +84,7 @@
         document.getElementById('ns-main').hidden = false;
         document.getElementById('ns-grid').innerHTML = C.naughty.map(c => `
           <article class="card ns-card">
-            <div class="pic"><img src="${c.img}" alt="" loading="lazy"><span class="bleep">${c.name}</span></div>
+            <div class="pic"><img src="${c.img}" alt="${c.name} cake" loading="lazy"></div>
             <div class="card-body"><h3>${c.name.toUpperCase()}</h3><p class="muted">${c.desc}</p></div>
             <div class="card-foot"><strong>From ${money(c.from)}</strong>
               <a class="btn btn-primary" href="order.html?occasion=himher&idea=${encodeURIComponent(c.name + ' cake')}">Request this</a></div>
