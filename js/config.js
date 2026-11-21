@@ -60,7 +60,7 @@ window.CAKEARCHY = {
     { id: 'baby', name: 'Baby', from: 50, img: 'assets/img/baby.jpg', lead: 'celebration' },
     { id: 'himher', name: 'Him/Her', from: 60, img: 'assets/img/himher.jpg', lead: 'celebration' },
     { id: 'cupcakes', name: 'Cupcakes', from: 15, img: 'assets/img/cupcakes.jpg', lead: 'quick' },
-    { id: 'bespoke', name: 'Bespoke', from: 75, img: 'assets/img/bespoke.jpg', lead: 'bespoke' },
+    { id: 'bespoke', name: 'Bespoke', from: 75, img: 'assets/img/florals.jpg', lead: 'bespoke' },
     { id: 'wedding', name: 'Wedding', from: 250, img: 'assets/img/wedding.jpg', lead: 'wedding' }
   ],
 
@@ -80,7 +80,7 @@ window.CAKEARCHY = {
       sizes: [{ id: 'six', name: '6 inch heart', note: 'Serves 10 to 12', price: 45 }],
       flavours: ['Vanilla and raspberry', 'Lemon', 'Red velvet', 'Chocolate'], colours: ['Pink and cream', 'Cherry red', 'Buttercream yellow', 'All white'], message: true,
       allergens: 'gluten, eggs and milk' },
-    { id: 'mini', name: 'Bento mini cake', sub: '4 inch · serves 2 to 4', img: 'assets/img/mini.jpg',
+    { id: 'mini', name: 'Bento mini cake', sub: '4 inch · serves 2 to 4', img: 'assets/img/bento.jpg',
       desc: 'A little cake with a big attitude and a short message on top. Perfect for "just because", office treats and date nights.',
       sizes: [{ id: 'one', name: 'One mini cake', note: 'Serves 2 to 4', price: 22 }],
       flavours: ['Vanilla', 'Chocolate', 'Lemon', 'Red velvet', 'Biscoff'], colours: ['Bubblegum', 'Buttercream yellow', 'Cream'], message: true,
@@ -110,11 +110,14 @@ window.CAKEARCHY = {
 
   signature: [
     { id: 'sprinkle', name: 'Sprinkle Explosion', occasion: 'Birthday', img: 'assets/img/birthday.jpg', from: 45, desc: 'Vanilla sponge, raspberry jam and enough sprinkles to make a grown-up giggle.' },
+    { id: 'lemon', name: 'Lemon Drizzle Queen', occasion: 'Birthday', img: 'assets/img/lemon.jpg', from: 45, desc: 'Britain\'s favourite cake, all dressed up. Zingy lemon sponge, a white drizzle and candied lemon crown.' },
+    { id: 'biscoff', name: 'Biscoff Boss', occasion: 'Birthday', img: 'assets/img/biscoff.jpg', from: 50, desc: 'Caramel biscuit sponge, Biscoff buttercream, a glossy drip and a crunchy crumb collar.' },
     { id: 'dino', name: 'Dino Disco', occasion: 'Kids', img: 'assets/img/kids.jpg', from: 55, desc: 'Chocolate fudge layers with a dinosaur who definitely came to party.' },
     { id: 'hello', name: 'Hello Little One', occasion: 'Baby', img: 'assets/img/baby.jpg', from: 50, desc: 'In 2 colourways for boys or girls.' },
     { id: 'fancy', name: 'Fancy Pants', occasion: 'Him/Her', img: 'assets/img/himher.jpg', from: 60, desc: 'A black and pink Lambeth cake with cherries on top. Rules optional.' },
+    { id: 'redvelvet', name: 'Red Velvet Rebel', occasion: 'Him/Her', img: 'assets/img/redvelvet.jpg', from: 55, desc: 'Deep red sponge, cream cheese frosting and semi-naked sides. Looks innocent, isn\'t.' },
     { id: 'crew', name: 'Cupcake Crew', occasion: 'Cupcakes', img: 'assets/img/cupcakes.jpg', from: 18, desc: 'Swirls, sprinkles and a cherry on top. Sold in sixes and twelves.' },
-    { id: 'totally', name: 'Totally You', occasion: 'Bespoke', img: 'assets/img/bespoke.jpg', from: 75, desc: 'A heart-shaped Lambeth cake and the starting point for any idea you have.' }
+    { id: 'totally', name: 'Totally You', occasion: 'Bespoke', img: 'assets/img/florals.jpg', from: 75, desc: 'Buttercream florals, sculpted toppers or something nobody\'s done yet. Bring the idea, I\'ll make it happen.' }
   ],
 
   // The Naughty Step: 18+ range. Names are bleeped on the site, spelled out on the cake.
@@ -136,7 +139,7 @@ window.CAKEARCHY = {
     { id: 'cup6', name: '6 matching cupcakes', note: 'For party bags or the grown-ups', price: 18 },
     { id: 'candle', name: 'Number candle', note: 'Gold, to match the crown', price: 3 }
   ],
-  flavours: ['Vanilla', 'Chocolate fudge', 'Lemon', 'Red velvet', 'Raspberry ripple'],
+  flavours: ['Vanilla', 'Chocolate fudge', 'Lemon drizzle', 'Red velvet', 'Biscoff', 'Raspberry ripple'],
   colours: ['Hot pink', 'Buttercream', 'Bubblegum', 'Ink', 'Surprise me'],
 
   // Allergy rules. What the form says when people tick things.
