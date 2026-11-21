@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Lead cards
   const lc = [
-    ['Quick bakes', `${C.leadTimes.quick} days`, 'Mini cakes, 6 inch favourites and cupcakes. Buy straight away.', 'var(--bg-accent)'],
+    ['Quick bakes', `${C.leadTimes.quick} days`, 'Mini cakes, heart cakes, brownies and cupcakes. Buy straight away.', 'var(--bg-accent)'],
     ['Celebration cakes', `${C.leadTimes.celebration} days+`, 'Birthday, kids, baby and Him/Her cakes with your colours and message.', 'var(--bg-brand-soft)'],
     ['Bespoke and 3D', '3 to 4 weeks', 'Totally custom designs, sculpted toppers and big parties.', 'var(--bg-brand-subtle)'],
     ['Weddings', '3 to 12 months', 'Tastings and a design consultation. Summer dates go first.', 'var(--bg-page)']
